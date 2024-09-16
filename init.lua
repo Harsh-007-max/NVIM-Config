@@ -18,8 +18,8 @@ require("lazy").setup("plugins")
 -- vim.cmd("colorscheme kanagawa-wave")
 -- vim.cmd("colorscheme carbonfox")
 -- vim.cmd('colorscheme everblush')
-vim.cmd("colorscheme tokyonight")
--- vim.cmd('colorscheme rose-pine')
+-- vim.cmd("colorscheme tokyonight")
+vim.cmd('colorscheme rose-pine')
 
 
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
