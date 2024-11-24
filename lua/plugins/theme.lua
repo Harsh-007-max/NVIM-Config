@@ -22,4 +22,9 @@ return {
     name = "rose-pine",
     priority = 1000,
   },
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+  },
 }

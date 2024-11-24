@@ -4,9 +4,13 @@ return {
   config = function()
     local config = require("nvim-treesitter.configs")
     config.setup({
-      ensure_innstalled = {"lua", "javascript","c","dart","c_sharp","html"},
-        highlight = { enable = true },
-        indent = { enable = true,disable={"dart"} },
+      ensure_innstalled = { "lua", "javascript", "c", "dart", "c_sharp", "html", "typescript", "react", "tsx", "jsx" },
+      highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+
+      },
+      indent = { enable = true, disable = { "dart" } },
     })
     local parser = require("nvim-treesitter.parsers").get_parser_configs()
     parser.dart = {

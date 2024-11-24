@@ -5,6 +5,7 @@ return {
 			options = {
 				-- theme = 'dracula'
 				theme = "tokyonight",
+				-- theme = "auto",
 				-- theme = "rose-pine",
 			},
 		})

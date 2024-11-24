@@ -11,6 +11,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { silent = true })
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { silent = true })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { silent = true })
 vim.keymap.set("t", "<A-Return>", "<C-\\><C-n>", { silent = true })
+vim.keymap.set("n", "<leader>gtj",":GoTagAdd json<Return>", { silent = true })
+vim.keymap.set("n", "<leader>gty",":GoTagAdd yaml<Return>", { silent = true })
 
 
 vim.keymap.set("i", "<A-Return>", "<Esc>", { silent = true })

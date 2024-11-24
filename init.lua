@@ -19,6 +19,7 @@ require("lazy").setup("plugins")
 -- vim.cmd("colorscheme carbonfox")
 -- vim.cmd('colorscheme everblush')
 vim.cmd("colorscheme tokyonight")
+-- vim.cmd("colorscheme cyberdream")
 -- vim.cmd('colorscheme rose-pine')
 
 
@@ -30,4 +31,13 @@ vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
 vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
   pattern = "*.razor",
   command = "set filetype=html.cshtml.razor"
+})
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'sh',
+  callback = function()
+    vim.lsp.start({
+      name = 'bash-language-server',
+      cmd = { 'bash-language-server', 'start' },
+    })
+  end,
 })
