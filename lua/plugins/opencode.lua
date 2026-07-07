@@ -1,5 +1,6 @@
 return {
   "NickvanDyke/opencode.nvim",
+  lazy = false,
   dependencies = {
     -- Required for the `snacks` terminal and picker provider
     { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
