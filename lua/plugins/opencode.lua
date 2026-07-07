@@ -6,9 +6,22 @@ return {
     { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
   },
   config = function()
+    local opencode_cmd = "opencode --port"
+    local snacks_terminal_opts = {
+      win = {
+        position = "right",
+        enter = false,
+      },
+    }
+
     ---@type opencode.Opts
     vim.g.opencode_opts = {
       auto_reload = true,
+      server = {
+        start = function()
+          require("snacks.terminal").open(opencode_cmd, snacks_terminal_opts)
+        end,
+      },
     }
 
     local opencode = require("opencode")
@@ -19,7 +32,9 @@ return {
     end
 
     -- Toggle and general interactions
-    vim.keymap.set({ "n", "t" }, "<leader>oo", function() opencode.toggle() end, { desc = "Toggle opencode" })
+    vim.keymap.set({ "n", "t" }, "<leader>oo", function()
+      require("snacks.terminal").toggle(opencode_cmd, snacks_terminal_opts)
+    end, { desc = "Toggle opencode" })
     vim.keymap.set({ "n", "v" }, "<leader>oa", function() opencode.ask("@this: ", { submit = false }) end, { desc = "Ask opencode" })
     vim.keymap.set({ "n", "v" }, "<leader>om", function() opencode.select() end, { desc = "Execute opencode action…" })
     
