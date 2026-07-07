@@ -1,43 +1,37 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+vim.g.base46_cache = vim.fn.stdpath "data" .. "/base46/"
+vim.g.mapleader = " "
 
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+-- bootstrap lazy and all plugins
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
+if not vim.uv.fs_stat(lazypath) then
+  local repo = "https://github.com/folke/lazy.nvim.git"
+  vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
 end
+
 vim.opt.rtp:prepend(lazypath)
 
-local opts = {}
-require("vim-options")
-require("lazy").setup("plugins")
--- vim.cmd("colorscheme kanagawa-wave")
--- vim.cmd("colorscheme carbonfox")
--- vim.cmd('colorscheme everblush')
-vim.cmd("colorscheme tokyonight")
--- vim.cmd("colorscheme cyberdream")
--- vim.cmd('colorscheme rose-pine')
+local lazy_config = require "configs.lazy"
 
+-- load plugins
+require("lazy").setup({
+  {
+    "NvChad/NvChad",
+    lazy = false,
+    branch = "v2.5",
+    import = "nvchad.plugins",
+  },
 
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-  pattern = "*.cshtml",
-  command = "set filetype=html.cshtml.razor"
-})
+  { import = "plugins" },
+}, lazy_config)
 
-vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
-  pattern = "*.razor",
-  command = "set filetype=html.cshtml.razor"
-})
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'sh',
-  callback = function()
-    vim.lsp.start({
-      name = 'bash-language-server',
-      cmd = { 'bash-language-server', 'start' },
-    })
-  end,
-})
+-- load theme
+dofile(vim.g.base46_cache .. "defaults")
+dofile(vim.g.base46_cache .. "statusline")
+
+require "options"
+require "autocmds"
+
+vim.schedule(function()
+  require "mappings"
+end)
